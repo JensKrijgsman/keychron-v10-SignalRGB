@@ -26,44 +26,110 @@ export function ControllableParameters() {
 // Plugin Version: Built for Protocol V1.0.6
 
 // Updated arrays for 75% Alice layout
-const vKeys = [ 
-	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,  // Row 1 (14 keys)
-	14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,  // Row 2 (14 keys)
-	28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,  // Row 3 (14 keys)
-	42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,       // Row 4 (13 keys)
-	55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66,           // Row 5 (12 keys)
-	67, 68, 69, 70, 71, 72, 73                                  // Row 6 (7 keys)
-];
-
-const vKeyNames = [
-	// Row 1
-	"Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Del",
-	// Row 2
-	"Grave", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Minus", "Equal", "Backspace",
-	// Row 3
-	"Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "LeftBracket", "RightBracket", "Backslash",
-	// Row 4
-	"CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Semicolon", "Quote", "Enter",
-	// Row 5
-	"LeftShift", "Z", "X", "C", "V", "B", "N", "M", "Comma", "Period", "Slash", "RightShift",
-	// Row 6
-	"LeftCtrl", "LeftWin", "LeftAlt", "Space" ,"Fn", "Space","RightAlt"
-];
-
-const vKeyPositions = [
-	// Row 1: 14 keys, y=0
-	[0,0], [1,0], [2,0], [3,0], [4,0], [5,0], [6,0], [7,0], [8,0], [9,0], [10,0], [11,0], [12,0], [13,0],
-	// Row 2: 14 keys, y=1 with a 0.5 offset
-	[0.5,1], [1.5,1], [2.5,1], [3.5,1], [4.5,1], [5.5,1], [6.5,1], [7.5,1], [8.5,1], [9.5,1], [10.5,1], [11.5,1], [12.5,1], [13.5,1],
-	// Row 3: 14 keys, y=2
-	[0,2], [1,2], [2,2], [3,2], [4,2], [5,2], [6,2], [7,2], [8,2], [9,2], [10,2], [11,2], [12,2], [13,2],
-	// Row 4: 13 keys, y=3 with a 0.5 offset
-	[0.5,3], [1.5,3], [2.5,3], [3.5,3], [4.5,3], [5.5,3], [6.5,3], [7.5,3], [8.5,3], [9.5,3], [10.5,3], [11.5,3], [12.5,3],
-	// Row 5: 12 keys, y=4 with a 0.5 offset
-	[0.5,4], [1.5,4], [2.5,4], [3.5,4], [4.5,4], [5.5,4], [6.5,4], [7.5,4], [8.5,4], [9.5,4], [10.5,4], [11.5,4],
-	// Row 6: 7 keys, y=5, spaced wider
-	[2,5], [4,5], [6,5], [8,5], [10,5], [12,5], [14,5]
-];
+//
+// 1) Numeric IDs for each key
+//
+const vKeys = [
+    // 0–14   (Row 0)
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+    // 15–29  (Row 1)
+    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+    // 30–44  (Row 2)
+    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44,
+    // 45–58  (Row 3)
+    45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+    // 59–71  (Row 4)
+    59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71,
+    // 72–81  (Row 5)
+    72, 73, 74, 75, 76, 77, 78, 79, 80, 81
+  ];
+  
+  //
+  // 2) Human-readable names for each key (same order as vKeys above)
+  //    Adjust these to match your actual legends/layout.
+  //
+  const vKeyNames = [
+    // Row 0 (indices 0..14)
+    "Encoder Knob",  // 0
+    "Esc",           // 1 (red key, top-left)
+    "F1",            // 2
+    "F2",            // 3
+    "F3",            // 4
+    "F4",            // 5
+    "F5",            // 6
+    "F6",            // 7
+    "F7",            // 8
+    "F8",            // 9
+    "F9",            // 10
+    "F10",           // 11
+    "F11",           // 12
+    "F12",           // 13
+    "Backspace",     // 14 (red key, top-right)
+  
+    // Row 1 (indices 15..29)
+    "`",  "1",  "2",  "3",  "4",  "5",
+    "6",  "7",  "8",  "9",  "0",  "-", 
+    "+",  "Delete", "Page Up",
+  
+    // Row 2 (indices 30..44)
+    "Tab", "Q", "W", "E", "R", "T", 
+    "Y",   "U", "I", "O", "P", "[", 
+    "]",   "\\", "Page Down",
+  
+    // Row 3 (indices 45..58)
+    "CapsLock", "A", "S", "D", "F", "G", 
+    "H",        "J", "K", "L", ";", "'",
+    "Enter",    "Home",
+  
+    // Row 4 (indices 59..71)
+    "Left Shift", "Z", "X", "C", "V", "B",
+    "N",          "M", "<", ">", "/", 
+    "Right Shift", "Up Arrow",
+  
+    // Row 5 (indices 72..81)
+    "Left Ctrl", "Left Win", "Left Alt", "Space",
+    "Right Alt", "Fn",       "Right Win",
+    "Left Arrow", "Down Arrow", "Right Arrow"
+  ];
+  
+  //
+  // 3) Logical (x,y) positions for each key
+  //    This re-uses the same row/column ‘shape’ as your first code,
+  //    including the same skipped columns. Each row is y = 0..5.
+  //    Note how Row 3 skips [13,3], Row 4 skips [1,4] & [14,4], etc.
+  //
+  const vKeyPositions = [
+    // Row 0: indices 0..14 => columns [0..14, row=0]
+    [0,0], [1,0], [2,0], [3,0], [4,0], [5,0], [6,0], [7,0], [8,0], [9,0],
+    [10,0], [11,0], [12,0], [13,0], [14,0],
+  
+    // Row 1: indices 15..29 => columns [0..14, row=1]
+    [0,1], [1,1], [2,1], [3,1], [4,1], [5,1], [6,1], [7,1], [8,1], [9,1],
+    [10,1], [11,1], [12,1], [13,1], [14,1],
+  
+    // Row 2: indices 30..44 => columns [0..14, row=2]
+    [0,2], [1,2], [2,2], [3,2], [4,2], [5,2], [6,2], [7,2], [8,2], [9,2],
+    [10,2], [11,2], [12,2], [13,2], [14,2],
+  
+    // Row 3: indices 45..58 => 14 keys
+    // (skip [13,3], so we go 0..12 and then 14)
+    [0,3], [1,3], [2,3], [3,3], [4,3], [5,3],
+    [6,3], [7,3], [8,3], [9,3], [10,3], [11,3],
+    [12,3],              // skip [13,3]
+    [14,3],
+  
+    // Row 4: indices 59..71 => 13 keys
+    // (skip [1,4] and [14,4], so we place keys at 0,2..13)
+    [0,4],              // skip [1,4]
+    [2,4], [3,4], [4,4], [5,4], [6,4],
+    [7,4], [8,4], [9,4], [10,4], [11,4], [12,4], [13,4],
+  
+    // Row 5: indices 72..81 => 10 keys
+    // (skip [3,5], [4,5], [5,5], [7,5], [8,5])
+    [0,5], [1,5], [2,5],           // skip [3,5], [4,5], [5,5]
+    [6,5],                         // skip [7,5], [8,5]
+    [9,5], [10,5], [11,5], [12,5], [13,5], [14,5]
+  ];
 
 let LEDCount = 0;
 let IsViaKeyboard = false;
